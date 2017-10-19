@@ -1,3 +1,4 @@
+*.properties
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -24,4 +25,8 @@ dist/
 nbdist/
 .nb-gradle/
 
-*.properties
+
+### Bootstrap files ###
+/src/main/resources/static/css/
+/src/main/resources/static/fonts/
+/src/main/resources/static/js/
