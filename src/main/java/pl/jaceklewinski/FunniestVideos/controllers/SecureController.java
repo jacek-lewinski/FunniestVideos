@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.jaceklewinski.FunniestVideos.models.User;
 import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 
+import java.util.Optional;
+
 @Controller
 public class SecureController {
 
@@ -22,12 +24,16 @@ public class SecureController {
 
     @PostMapping("/login")
     public String postLogin(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
-        User user = userRepository.findByUsername(username);
-        if (password.equals(user.getPassword())) {
-            model.addAttribute("loggedInfo", "<div class=\"alert alert-success\" role=\"alert\">Zalogowano poprawnie</div>");
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            if (password.equals(user.get().getPassword())) {
+                model.addAttribute("loggedInfo", "<div class=\"alert alert-success\" role=\"alert\">Zalogowano poprawnie</div>");
+                return "login";
+            }
+            model.addAttribute("loggedInfo", "<div class=\"alert alert-danger\" role=\"alert\">Zły login lub hasło</div>");
             return "login";
         }
-        model.addAttribute("loggedInfo", "<div class=\"alert alert-danger\" role=\"alert\">Zły login lub hasło</div>");
         return "login";
     }
 }
