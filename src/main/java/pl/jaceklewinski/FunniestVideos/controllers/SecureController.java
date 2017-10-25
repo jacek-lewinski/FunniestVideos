@@ -3,13 +3,16 @@ package pl.jaceklewinski.FunniestVideos.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.jaceklewinski.FunniestVideos.models.User;
 import pl.jaceklewinski.FunniestVideos.models.forms.UserForm;
 import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -49,7 +52,14 @@ public class SecureController {
     }
 
     @PostMapping("/registration")
-    public String postRegistration() {
+    public String postRegistration(@ModelAttribute("userForm") @Valid UserForm userForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "registration";
+        }
+
+        User user = new User(userForm);
+        userRepository.save(user);
+
         return "registration";
     }
 }
