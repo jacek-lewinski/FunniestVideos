@@ -28,7 +28,7 @@ nbdist/
 
 
 ### Bootstrap files ###
-/src/main/resources/static/css/
+/src/main/resources/static/css/*
 !/src/main/resources/static/css/main.css
 /src/main/resources/static/fonts/
 /src/main/resources/static/js/

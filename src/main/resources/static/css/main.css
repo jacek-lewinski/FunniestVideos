@@ -1,0 +1,30 @@
+body {
+	color: #9d9d9d;
+	background-color: lightgray;
+}
+
+.top-buffer {
+	margin-top: 30px;
+}
+
+.video-background {
+	background-color: #222222;
+	border-radius: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.footer {
+	background-color: #222222;
+	border-radius: 4px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
+	min-height: 40px;
+}
+
+.form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
