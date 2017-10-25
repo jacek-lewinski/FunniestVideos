@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.jaceklewinski.FunniestVideos.models.User;
+import pl.jaceklewinski.FunniestVideos.models.forms.UserForm;
 import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 
 import java.util.Optional;
@@ -39,5 +40,16 @@ public class SecureController {
         model.addAttribute("isLogged", false);
         model.addAttribute("loggedInfo", "Użytkownik o takiej nazwie nie istnieje!");
         return "login";
+    }
+
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("userForm", new UserForm());
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String postRegistration() {
+        return "registration";
     }
 }
