@@ -2,6 +2,8 @@ package pl.jaceklewinski.FunniestVideos.models.forms;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.Date;
+
 public class UserForm {
 
     @NotEmpty
@@ -13,12 +15,15 @@ public class UserForm {
     @NotEmpty
     private String email;
 
+    private Date date;
+
     public UserForm () {}
 
-    private UserForm(String username, String password, String email) {
+    private UserForm(String username, String password, String email, Date date) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.date = date;
     }
 
     public String getUsername() {
@@ -43,5 +48,13 @@ public class UserForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
