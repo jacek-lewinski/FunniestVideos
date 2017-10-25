@@ -52,13 +52,17 @@ public class SecureController {
     }
 
     @PostMapping("/registration")
-    public String postRegistration(@ModelAttribute("userForm") @Valid UserForm userForm, BindingResult result) {
+    public String postRegistration(@ModelAttribute("userForm") @Valid UserForm userForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("isLogged", false);
+            model.addAttribute("registeredInfo", "Znaleziono błędy w formularzu!");
             return "registration";
         }
 
         User user = new User(userForm);
         userRepository.save(user);
+        model.addAttribute("isLogged", true);
+        model.addAttribute("registeredInfo", "Zostałeś zarejestrowany");
 
         return "registration";
     }

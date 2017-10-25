@@ -17,7 +17,6 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Date date;
 
     public User () {}
 
@@ -25,7 +24,6 @@ public class User {
         this.username = userForm.getUsername();
         this.email = userForm.getEmail();
         this.password = userForm.getPassword();
-        this.date = userForm.getDate();
     }
 
     public int getId() {
@@ -58,13 +56,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }
