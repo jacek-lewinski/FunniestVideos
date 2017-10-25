@@ -63,6 +63,7 @@
                             </div>
                         </div>
                     </form>
+                    <div th:class="${isLogged} ? 'alert-success' : 'alert-danger'" role="alert" th:text="${loggedInfo}"></div>
                 </div>
                 <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
             </div>

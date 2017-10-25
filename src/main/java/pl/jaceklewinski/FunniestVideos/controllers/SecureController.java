@@ -28,12 +28,16 @@ public class SecureController {
 
         if (user.isPresent()) {
             if (password.equals(user.get().getPassword())) {
-                model.addAttribute("loggedInfo", "<div class=\"alert alert-success\" role=\"alert\">Zalogowano poprawnie</div>");
+                model.addAttribute("isLogged", true);
+                model.addAttribute("loggedInfo", "Zalogowano poprawnie.");
                 return "login";
             }
-            model.addAttribute("loggedInfo", "<div class=\"alert alert-danger\" role=\"alert\">Zły login lub hasło</div>");
+            model.addAttribute("isLogged", false);
+            model.addAttribute("loggedInfo", "Błędne hasło!");
             return "login";
         }
+        model.addAttribute("isLogged", false);
+        model.addAttribute("loggedInfo", "Użytkownik o takiej nazwie nie istnieje!");
         return "login";
     }
 }
