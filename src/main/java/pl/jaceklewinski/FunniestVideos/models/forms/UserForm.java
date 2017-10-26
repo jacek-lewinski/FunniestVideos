@@ -19,6 +19,9 @@ public class UserForm {
     @NotEmpty(message = "{NotEmpty.registration.password}")
     private String email;
 
+    private String repassword;
+    private String reemail;
+
     public UserForm () {}
 
     private UserForm(String username, String password, String email, Date date) {
@@ -49,5 +52,21 @@ public class UserForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
+    }
+
+    public String getReemail() {
+        return reemail;
+    }
+
+    public void setReemail(String reemail) {
+        this.reemail = reemail;
     }
 }

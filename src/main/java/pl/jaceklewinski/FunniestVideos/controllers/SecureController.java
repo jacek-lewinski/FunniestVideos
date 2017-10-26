@@ -59,11 +59,22 @@ public class SecureController {
             return "registration";
         }
 
-        User user = new User(userForm);
-        userRepository.save(user);
-        model.addAttribute("isLogged", true);
-        model.addAttribute("registeredInfo", "Zostałeś zarejestrowany");
+        if (userForm.getPassword().equals(userForm.getRepassword())) {
+            if (userForm.getEmail().equals(userForm.getReemail())) {
 
+                User user = new User(userForm);
+                userRepository.save(user);
+                model.addAttribute("isLogged", true);
+                model.addAttribute("registeredInfo", "Zostałeś zarejestrowany");
+
+                return "registration";
+            }
+            model.addAttribute("isLogged", false);
+            model.addAttribute("registeredInfo", "Podane adresy email nie są jednakowe!");
+            return "registration";
+        }
+        model.addAttribute("isLogged", false);
+        model.addAttribute("registeredInfo", "Podane hasła nie są jednakowe!");
         return "registration";
     }
 }
