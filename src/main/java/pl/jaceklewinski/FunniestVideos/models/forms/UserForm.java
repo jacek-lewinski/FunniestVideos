@@ -1,18 +1,22 @@
 package pl.jaceklewinski.FunniestVideos.models.forms;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class UserForm {
 
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.registration.username}")
+    @Size(min = 4, message = "{Size.registration.username}")
     private String username;
 
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.registration.password}")
+    @Size(min = 4, message = "{Size.registration.password}")
     private String password;
 
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.registration.password}")
     private String email;
 
     public UserForm () {}
