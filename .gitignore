@@ -3,6 +3,8 @@
 /build/
 /out/
 !gradle/wrapper/gradle-wrapper.jar
+!/src/main/resources/ValidationMessages.properties
+!/src/main/resources/ValidationMessages_pl.properties
 
 ### STS ###
 .apt_generated
