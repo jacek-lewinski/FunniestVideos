@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.jaceklewinski.FunniestVideos.models.User;
+import pl.jaceklewinski.FunniestVideos.models.UserData;
 import pl.jaceklewinski.FunniestVideos.models.forms.UserForm;
 import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 
@@ -20,6 +21,9 @@ public class SecureController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserData userData;
 
     @GetMapping("/login")
     public String login() {
@@ -34,7 +38,8 @@ public class SecureController {
             if (password.equals(user.get().getPassword())) {
                 model.addAttribute("isLogged", true);
                 model.addAttribute("loggedInfo", "Zalogowano poprawnie.");
-                return "login";
+                userData.setLogged(true);
+                return "userpanel";
             }
             model.addAttribute("isLogged", false);
             model.addAttribute("loggedInfo", "Błędne hasło!");
