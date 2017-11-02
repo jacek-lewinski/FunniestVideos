@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
         <html lang="pl" xmlns:th="http://www.thymeleaf.org">
         <head>
             <meta charset="UTF-8">
@@ -48,7 +44,7 @@
         <div class="row">
             <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
             <div class="col-xs-10 col-sm-8 col-md-8 col-lg-6">
-                <h1>Witaj zalogowany użytkowniku!</h1>
+                <h1>Witaj <span th:text="${username}"></span></h1>
             </div>
             <div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>
         </div>

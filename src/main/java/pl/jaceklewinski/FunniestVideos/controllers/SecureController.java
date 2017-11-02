@@ -82,8 +82,9 @@ public class SecureController {
     }
 
     @GetMapping("/userpanel")
-    public String userpanel() {
+    public String userpanel(Model model) {
         if (userData.isLogged()) {
+            model.addAttribute("username", userData.getUser().getUsername());
             return "userpanel";
         }
         return "redirect:/";
