@@ -23,7 +23,8 @@ public class SecureController {
     UserData userData;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("loggedUser", userData.isLogged());
         return "login";
     }
 
@@ -50,6 +51,7 @@ public class SecureController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
+        model.addAttribute("loggedUser", userData.isLogged());
         model.addAttribute("userForm", new UserForm());
         return "registration";
     }
@@ -83,6 +85,7 @@ public class SecureController {
 
     @GetMapping("/userpanel")
     public String userpanel(Model model) {
+        model.addAttribute("loggedUser", userData.isLogged());
         if (userData.isLogged()) {
             model.addAttribute("username", userData.getUser().getUsername());
             return "userpanel";
