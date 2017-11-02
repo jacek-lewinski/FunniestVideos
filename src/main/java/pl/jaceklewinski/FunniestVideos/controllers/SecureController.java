@@ -82,4 +82,12 @@ public class SecureController {
         model.addAttribute("registeredInfo", "Podane hasła nie są jednakowe!");
         return "registration";
     }
+
+    @GetMapping("/userpanel")
+    public String userpanel() {
+        if (userData.isLogged()) {
+            return "userpanel";
+        }
+        return "redirect:/";
+    }
 }
