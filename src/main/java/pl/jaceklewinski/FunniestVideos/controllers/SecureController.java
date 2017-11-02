@@ -90,7 +90,7 @@ public class SecureController {
             model.addAttribute("username", userData.getUser().getUsername());
             return "userpanel";
         }
-        return "redirect:/";
+        return "403";
     }
 
     @GetMapping("/logout")
