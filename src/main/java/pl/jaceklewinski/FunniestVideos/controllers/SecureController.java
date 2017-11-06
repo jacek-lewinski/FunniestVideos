@@ -20,12 +20,14 @@ public class SecureController {
     UserRepository userRepository;
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, HttpServletRequest request) {
+        model.addAttribute("username", request.getRemoteUser());
         return "login";
     }
 
     @GetMapping("/registration")
-    public String registration(Model model) {
+    public String registration(Model model, HttpServletRequest request) {
+        model.addAttribute("username", request.getRemoteUser());
         model.addAttribute("userForm", new UserForm());
         return "registration";
     }
