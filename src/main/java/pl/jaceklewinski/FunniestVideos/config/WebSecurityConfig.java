@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/", "/css/**", "/fonts/**", "/js/**", "/registration").permitAll()
                 .antMatchers("/userpanel").authenticated()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll()
+                .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/userpanel")
                 .and().logout().permitAll();
         http
                 .exceptionHandling().accessDeniedPage("/403");
