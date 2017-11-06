@@ -32,6 +32,8 @@ public class VideoController {
 
     @PostMapping("/addvideo")
     public String postAddVideo(@ModelAttribute("videoForm") @Valid VideoForm videoForm, BindingResult result, Model model) {
+        model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
+
         if (result.hasErrors()) {
             model.addAttribute("info", "Znaleziono błędy w formularzu!");
             return "addvideo";
