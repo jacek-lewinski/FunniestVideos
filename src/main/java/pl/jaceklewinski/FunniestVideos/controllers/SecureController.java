@@ -1,6 +1,7 @@
 package pl.jaceklewinski.FunniestVideos.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +22,14 @@ public class SecureController {
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
+        model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
         model.addAttribute("username", request.getRemoteUser());
         return "login";
     }
 
     @GetMapping("/registration")
     public String registration(Model model, HttpServletRequest request) {
+        model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
         model.addAttribute("username", request.getRemoteUser());
         model.addAttribute("userForm", new UserForm());
         return "registration";
@@ -61,6 +64,7 @@ public class SecureController {
 
     @GetMapping("/userpanel")
     public String userpanel(Model model, HttpServletRequest request) {
+        model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
         model.addAttribute("username", request.getRemoteUser());
         return "userpanel";
     }
