@@ -14,13 +14,9 @@ public class MainController {
     @Autowired
     VideoRepository videoRepository;
 
-    @Autowired
-    UserData userData;
-
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("videos", videoRepository.findAll());
-        model.addAttribute("loggedUser", userData.isLogged());
         return "index";
     }
 }
