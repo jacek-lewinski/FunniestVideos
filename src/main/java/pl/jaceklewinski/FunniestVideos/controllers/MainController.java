@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.jaceklewinski.FunniestVideos.models.UserData;
 import pl.jaceklewinski.FunniestVideos.repositories.VideoRepository;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class MainController {
 
@@ -15,7 +17,8 @@ public class MainController {
     VideoRepository videoRepository;
 
     @GetMapping("/")
-    public String main(Model model) {
+    public String main(Model model, HttpServletRequest request) {
+        model.addAttribute("username", request.getRemoteUser());
         model.addAttribute("videos", videoRepository.findAll());
         return "index";
     }

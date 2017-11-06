@@ -60,3 +60,7 @@ body {
     border-radius: 4px;
     text-align: center;
 }
+
+.username {
+    color: deepskyblue;
+}
