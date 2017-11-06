@@ -1,5 +1,7 @@
 package pl.jaceklewinski.FunniestVideos.models;
 
+import pl.jaceklewinski.FunniestVideos.models.forms.VideoForm;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +21,11 @@ public class Video {
     private Date date;
 
     public Video () {}
+
+    public Video (VideoForm videoForm) {
+        this.title = videoForm.getTitle();
+        this.video_src = videoForm.getSrc();
+    }
 
     public int getId() {
         return id;
