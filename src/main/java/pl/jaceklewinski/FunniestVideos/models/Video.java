@@ -18,7 +18,6 @@ public class Video {
     private String video_src;
     private int thumbs_up;
     private int thumbs_down;
-    private Date date;
 
     public Video () {}
 
@@ -65,13 +64,5 @@ public class Video {
 
     public void setThumbs_down(int thumbs_down) {
         this.thumbs_down = thumbs_down;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }
