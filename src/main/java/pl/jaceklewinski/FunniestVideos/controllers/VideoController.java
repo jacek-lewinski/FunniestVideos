@@ -26,6 +26,7 @@ public class VideoController {
     @GetMapping("/addvideo")
     public String addVideo(Model model) {
         model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
+        model.addAttribute("videoForm", new VideoForm());
         return "addvideo";
     }
 
