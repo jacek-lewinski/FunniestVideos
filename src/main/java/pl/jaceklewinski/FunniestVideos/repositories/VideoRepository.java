@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface VideoRepository extends CrudRepository<Video, Integer> {
-    List<Video> findAll();
+    List<Video> findAllByOrderByIdDesc();
 }

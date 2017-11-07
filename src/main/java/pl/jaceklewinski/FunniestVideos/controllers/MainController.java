@@ -20,7 +20,7 @@ public class MainController {
     public String main(Model model, HttpServletRequest request) {
         model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
         model.addAttribute("username", request.getRemoteUser());
-        model.addAttribute("videos", videoRepository.findAll());
+        model.addAttribute("videos", videoRepository.findAllByOrderByIdDesc());
         return "index";
     }
 }
