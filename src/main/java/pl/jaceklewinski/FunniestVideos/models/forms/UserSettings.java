@@ -3,6 +3,7 @@ package pl.jaceklewinski.FunniestVideos.models.forms;
 public class UserSettings {
     private String password;
     private String newpassword;
+    private String renewpassword;
 
     public UserSettings () {}
 
@@ -25,5 +26,13 @@ public class UserSettings {
 
     public void setNewpassword(String newpassword) {
         this.newpassword = newpassword;
+    }
+
+    public String getRenewpassword() {
+        return renewpassword;
+    }
+
+    public void setRenewpassword(String renewpassword) {
+        this.renewpassword = renewpassword;
     }
 }
