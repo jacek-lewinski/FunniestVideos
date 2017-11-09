@@ -14,6 +14,8 @@ import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 public class SecureController {
@@ -72,8 +74,19 @@ public class SecureController {
     }
 
     @PostMapping("/userpanel")
-    public String postUserpanel(@ModelAttribute("userSettings") UserSettings userSettings, Model model) {
+    public String postUserpanel(@ModelAttribute("userSettings") UserSettings userSettings, Model model, HttpServletRequest request) {
+        model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
 
+        Optional<User> user = userRepository.findByUsername(request.getRemoteUser());
+        if (user.isPresent()) {
+            if (userSettings.getPassword().equals(user.get().getPassword())) {
+                return "userpanel";
+            }
+        } else {
+            throw new NoSuchElementException("Nie jesteś zalogowany");
+        }
+
+        model.addAttribute("changePasswordInfo", "Podane hasło jest nieprawidłowe!");
         return "userpanel";
     }
 }
