@@ -28,17 +28,17 @@
                         <div role="tabpanel" class="tab-pane fade in active" id="home">TU BĘDZIE LISTA FILMÓW WRZUCONYCH PRZEZ UŻYTKOWNIKA</div>
                         <div role="tabpanel" class="tab-pane fade" id="profile">TU BĘDIZE LISTA FILMÓW DODANYCH DO ULUBIONYCH</div>
                         <div role="tabpanel" class="tab-pane fade" id="messages">USTWIENIA - MOŻLIWOŚĆ ZMIANY HASŁA, ITP
-                            <form th:action="@{/userpanel}" method="post" class="form-horizontal form">
+                            <form th:action="@{/userpanel}" th:object="${userSettings}" method="post" class="form-horizontal form">
                                 <div class="form-group">
                                     <label for="password" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 control-label">Aktualne hasło:</label>
                                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Aktualne hasło">
+                                        <input type="password" class="form-control" id="password" th:field="*{password}" name="password" placeholder="Aktualne hasło">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="newpassword" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 control-label">Nowe hasło:</label>
                                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Nowe hasło">
+                                        <input type="password" class="form-control" id="newpassword" th:field="*{newpassword}" name="newpassword" placeholder="Nowe hasło">
                                     </div>
                                 </div>
                                 <div class="form-group">
