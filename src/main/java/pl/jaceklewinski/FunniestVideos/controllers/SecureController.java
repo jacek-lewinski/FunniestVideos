@@ -68,4 +68,10 @@ public class SecureController {
         model.addAttribute("username", request.getRemoteUser());
         return "userpanel";
     }
+
+    @PostMapping("/userpanel")
+    public String postUserpanel() {
+
+        return "userpanel";
+    }
 }
