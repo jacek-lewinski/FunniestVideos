@@ -27,7 +27,34 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="home">TU BĘDZIE LISTA FILMÓW WRZUCONYCH PRZEZ UŻYTKOWNIKA</div>
                         <div role="tabpanel" class="tab-pane fade" id="profile">TU BĘDIZE LISTA FILMÓW DODANYCH DO ULUBIONYCH</div>
-                        <div role="tabpanel" class="tab-pane fade" id="messages">USTWIENIA - MOŻLIWOŚĆ ZMIANY HASŁA, ITP</div>
+                        <div role="tabpanel" class="tab-pane fade" id="messages">USTWIENIA - MOŻLIWOŚĆ ZMIANY HASŁA, ITP
+                            <form th:action="@{/userpanel}" method="post" class="form-horizontal form">
+                                <div class="form-group">
+                                    <label for="password" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 control-label">Aktualne hasło:</label>
+                                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Aktualne hasło">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newpassword" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 control-label">Nowe hasło:</label>
+                                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Nowe hasło">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="renewpassword" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 control-label">Powtórz nowe hasło:</label>
+                                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                        <input type="password" class="form-control" id="renewpassword" name="renewpassword" placeholder="Powtórz nowe hasło">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-offset-8 col-xs-4 col-sm-offset-9 col-sm-3 col-md-offset-9 col-md-3 col-lg-offset-9 col-lg-3">
+                                        <button type="submit" class="btn btn-default">Zmień hasło</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
