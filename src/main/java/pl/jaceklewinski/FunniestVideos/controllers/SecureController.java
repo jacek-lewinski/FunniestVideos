@@ -77,13 +77,15 @@ public class SecureController {
     public String postUserpanel(@ModelAttribute("userSettings") UserSettings userSettings, Model model, HttpServletRequest request) {
         model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
 
-        Optional<User> user = userRepository.findByUsername(request.getRemoteUser());
+        String username = request.getRemoteUser();
+        Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
             String userCurrentPassword = user.get().getPassword();
             String userNewPassword = userSettings.getNewpassword();
             if (userSettings.getPassword().equals(userCurrentPassword)) {
                 if (userNewPassword.equals(userSettings.getRenewpassword())) {
-                    userRepository.update(userCurrentPassword, userNewPassword);
+                    userRepository.update(userNewPassword, username);
+                    model.addAttribute("changePasswordInfo", "Hasło zostało zmienione!");
                     return "userpanel";
                 }
                 model.addAttribute("changePasswordInfo", "Nowe hasła nie są takie same!");
