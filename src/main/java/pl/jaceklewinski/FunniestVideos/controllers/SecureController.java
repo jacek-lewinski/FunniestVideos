@@ -79,14 +79,21 @@ public class SecureController {
 
         Optional<User> user = userRepository.findByUsername(request.getRemoteUser());
         if (user.isPresent()) {
-            if (userSettings.getPassword().equals(user.get().getPassword())) {
+            String userCurrentPassword = user.get().getPassword();
+            String userNewPassword = userSettings.getNewpassword();
+            if (userSettings.getPassword().equals(userCurrentPassword)) {
+                if (userNewPassword.equals(userSettings.getRenewpassword())) {
+                    userRepository.update(userCurrentPassword, userNewPassword);
+                    return "userpanel";
+                }
+                model.addAttribute("changePasswordInfo", "Nowe hasła nie są takie same!");
                 return "userpanel";
             }
         } else {
             throw new NoSuchElementException("Nie jesteś zalogowany");
         }
 
-        model.addAttribute("changePasswordInfo", "Podane hasło jest nieprawidłowe!");
+        model.addAttribute("changePasswordInfo", "Podane stare hasło jest nieprawidłowe!");
         return "userpanel";
     }
 }
