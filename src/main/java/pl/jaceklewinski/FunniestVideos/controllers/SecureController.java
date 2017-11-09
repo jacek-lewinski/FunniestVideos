@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.jaceklewinski.FunniestVideos.models.User;
 import pl.jaceklewinski.FunniestVideos.models.forms.UserForm;
+import pl.jaceklewinski.FunniestVideos.models.forms.UserSettings;
 import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,11 +67,12 @@ public class SecureController {
     public String userpanel(Model model, HttpServletRequest request) {
         model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
         model.addAttribute("username", request.getRemoteUser());
+        model.addAttribute("userSettings", new UserSettings());
         return "userpanel";
     }
 
     @PostMapping("/userpanel")
-    public String postUserpanel() {
+    public String postUserpanel(@ModelAttribute("userSettings") UserSettings userSettings, Model model) {
 
         return "userpanel";
     }
