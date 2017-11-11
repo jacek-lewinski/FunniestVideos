@@ -18,12 +18,14 @@ public class Video {
     private String video_src;
     private int thumbs_up;
     private int thumbs_down;
+    private int user_id;
 
     public Video () {}
 
-    public Video (VideoForm videoForm) {
+    public Video (VideoForm videoForm, int user_id) {
         this.title = videoForm.getTitle();
         this.video_src = videoForm.getSrc();
+        this.user_id = user_id;
     }
 
     public int getId() {
@@ -64,5 +66,13 @@ public class Video {
 
     public void setThumbs_down(int thumbs_down) {
         this.thumbs_down = thumbs_down;
+    }
+
+    public int getUser_idser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

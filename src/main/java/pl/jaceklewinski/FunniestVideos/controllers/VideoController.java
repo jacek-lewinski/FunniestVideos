@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.jaceklewinski.FunniestVideos.models.User;
 import pl.jaceklewinski.FunniestVideos.models.Video;
 import pl.jaceklewinski.FunniestVideos.models.forms.VideoForm;
+import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
 import pl.jaceklewinski.FunniestVideos.repositories.VideoRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/video")
@@ -22,6 +26,9 @@ public class VideoController {
 
     @Autowired
     VideoRepository videoRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/addvideo")
     public String addVideo(Model model) {
@@ -31,7 +38,11 @@ public class VideoController {
     }
 
     @PostMapping("/addvideo")
-    public String postAddVideo(@ModelAttribute("videoForm") @Valid VideoForm videoForm, BindingResult result, Model model) {
+    public String postAddVideo(@ModelAttribute("videoForm") @Valid VideoForm videoForm, BindingResult result, Model model, HttpServletRequest request) {
+        String username = request.getRemoteUser();
+        Optional<User> user = userRepository.findByUsername(username);
+        int userId = user.get().getId();
+
         model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
 
         if (result.hasErrors()) {
@@ -39,10 +50,10 @@ public class VideoController {
             return "addvideo";
         }
 
-        Video video = new Video(videoForm);
+        Video video = new Video(videoForm, userId);
         videoRepository.save(video);
         model.addAttribute("addInfo", "Dodano video!");
 
-        return "addvideo";
+        return "redirect:/video/addvideo";
     }
 }
