@@ -11,6 +11,7 @@ import pl.jaceklewinski.FunniestVideos.models.User;
 import pl.jaceklewinski.FunniestVideos.models.forms.UserForm;
 import pl.jaceklewinski.FunniestVideos.models.forms.UserSettings;
 import pl.jaceklewinski.FunniestVideos.repositories.UserRepository;
+import pl.jaceklewinski.FunniestVideos.repositories.VideoRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,6 +23,9 @@ public class SecureController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    VideoRepository videoRepository;
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
@@ -70,6 +74,10 @@ public class SecureController {
         model.addAttribute("isLogged", !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken));
         model.addAttribute("username", request.getRemoteUser());
         model.addAttribute("userSettings", new UserSettings());
+
+        String username = request.getRemoteUser();
+        Optional<User> user = userRepository.findByUsername(username);
+        model.addAttribute("videos", videoRepository.findAllByUser(user.get().getId()));
         return "userpanel";
     }
 
@@ -79,6 +87,7 @@ public class SecureController {
 
         String username = request.getRemoteUser();
         Optional<User> user = userRepository.findByUsername(username);
+
         if (user.isPresent()) {
             String userCurrentPassword = user.get().getPassword();
             String userNewPassword = userSettings.getNewpassword();
@@ -94,7 +103,6 @@ public class SecureController {
         } else {
             throw new NoSuchElementException("Nie jesteś zalogowany");
         }
-
         model.addAttribute("changePasswordInfo", "Podane stare hasło jest nieprawidłowe!");
         return "userpanel";
     }

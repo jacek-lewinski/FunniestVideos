@@ -25,7 +25,20 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="home">TU BĘDZIE LISTA FILMÓW WRZUCONYCH PRZEZ UŻYTKOWNIKA</div>
+                        <div role="tabpanel" class="tab-pane fade in active" id="home">TU BĘDZIE LISTA FILMÓW WRZUCONYCH PRZEZ UŻYTKOWNIKA
+                            <th:block th:each="video : ${videos}">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 col-xl-4 col-lg-4"><span th:text="${video.title}"></span></div>
+                                    <div class="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" th:src="${video.video_src}" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-xl-4 col-lg-4">ACTION BUTTON</div>
+                                </div>
+                                <br>
+                            </th:block>
+                        </div>
                         <div role="tabpanel" class="tab-pane fade" id="profile">TU BĘDIZE LISTA FILMÓW DODANYCH DO ULUBIONYCH</div>
                         <div role="tabpanel" class="tab-pane fade" id="messages">USTWIENIA - MOŻLIWOŚĆ ZMIANY HASŁA, ITP
                             <form th:action="@{/userpanel}" th:object="${userSettings}" method="post" class="form-horizontal form">
