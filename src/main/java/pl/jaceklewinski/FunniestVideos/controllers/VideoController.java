@@ -6,10 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.jaceklewinski.FunniestVideos.models.User;
 import pl.jaceklewinski.FunniestVideos.models.Video;
 import pl.jaceklewinski.FunniestVideos.models.forms.VideoForm;
@@ -55,5 +52,11 @@ public class VideoController {
         model.addAttribute("addInfo", "Dodano video!");
 
         return "redirect:/video/addvideo";
+    }
+
+    @GetMapping("/deleteVideo")
+    public String deleteVideo (@RequestParam("videoId") int videoId) {
+        videoRepository.delete(videoId);
+        return "redirect:/userpanel";
     }
 }
